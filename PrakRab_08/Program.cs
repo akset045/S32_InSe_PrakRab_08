@@ -30,6 +30,7 @@ namespace PrakRab_08
             key1.Close();  
             key2.Close();  
             Console.WriteLine("Ключи созданы!\nДиректория открытого: {0}\nДиректория закрытого: {1}", path1, path2);
+            Console.ReadKey();
         } 
         public static int fun(int n, int k, int a)  
         {  
@@ -61,15 +62,17 @@ namespace PrakRab_08
             FileStream file1 = new FileStream(path2, FileMode.Create); 
             StreamWriter sw = new StreamWriter(file1, Encoding.UTF8); 
             sw.Write(str2); 
-            sw.Close(); 
-        } 
+            sw.Close();
+            Console.ReadKey();
+
+        }
         public static void decrypt(string closekey, string path1, string path2)
             {
                 string test = File.ReadAllText(closekey, Encoding.Default);
                 string[] mas = test.Split('\n');
                 int n = int.Parse(mas[0]); int b = int.Parse(mas[1]); 
                 StreamReader sr = new StreamReader(path1);
-                str1 = sr.ReadToEnd();  
+                string str1 = sr.ReadToEnd();  
                 string[] str2 = str1.Split('.');
                 string str3 = ""; 
                 for (int i = 0; i < str2.Length - 1; i++) 
@@ -84,9 +87,11 @@ namespace PrakRab_08
                   FileStream file1 = new FileStream(path2, FileMode.Create);  
                   StreamWriter sw = new StreamWriter(file1, Encoding.Unicode); 
                   sw.Write(str3);  
-                  sw.Close(); 
+                  sw.Close();
+            Console.ReadKey();
 
-            } 
+
+        }
         static void Main(string[] args)  
         {  
             if (args.Length == 0) Console.WriteLine("RSA\n");  
@@ -94,6 +99,8 @@ namespace PrakRab_08
             if (args.Length != 0 && args[0] == " - e") crypt(args[1], args[2], args[3]); 
             if (args.Length != 0 && args[0] == " - d") decrypt(args[1], args[2], args[3]); 
             Console.ReadLine();
-         }
+            Console.ReadKey();
+
+        }
     }
 }
